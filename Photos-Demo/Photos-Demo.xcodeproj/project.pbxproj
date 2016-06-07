@@ -54,6 +54,7 @@
 		5508D05C1D06522B00DF8FA4 /* Photos-DemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Photos-DemoUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5508D0601D06522B00DF8FA4 /* Photos_DemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos_DemoUITests.swift; sourceTree = "<group>"; };
 		5508D0621D06522B00DF8FA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5508D0711D0666D900DF8FA4 /* Photos-Demo-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Photos-Demo-Bridging-Header.h"; sourceTree = "<group>"; };
 		60C14B80E087D23A72C22BC1 /* Pods_Photos_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Photos_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E07DC079501FE9F9773FF89 /* Pods-Photos-Demo-Photos-DemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Photos-Demo-Photos-DemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Photos-Demo-Photos-DemoTests/Pods-Photos-Demo-Photos-DemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C74648DE2E631999EA098EBE /* Pods-Photos-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Photos-Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Photos-Demo/Pods-Photos-Demo.release.xcconfig"; sourceTree = "<group>"; };
@@ -133,6 +134,7 @@
 				5508D0471D06522B00DF8FA4 /* Assets.xcassets */,
 				5508D0491D06522B00DF8FA4 /* LaunchScreen.storyboard */,
 				5508D04C1D06522B00DF8FA4 /* Info.plist */,
+				5508D0711D0666D900DF8FA4 /* Photos-Demo-Bridging-Header.h */,
 			);
 			path = "Photos-Demo";
 			sourceTree = "<group>";
@@ -524,6 +526,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -562,6 +565,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
