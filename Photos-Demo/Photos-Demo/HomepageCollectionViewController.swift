@@ -41,7 +41,7 @@ class HomepageCollectionViewController: UICollectionViewController {
 extension HomepageCollectionViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSize(width: OrientationManager.deviceWidth() / 2.5, height: OrientationManager.deviceHeight() / 3.25)
+        return CGSize(width: OrientationManager.deviceWidth() / 2, height: OrientationManager.deviceHeight() / 3.25)
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
