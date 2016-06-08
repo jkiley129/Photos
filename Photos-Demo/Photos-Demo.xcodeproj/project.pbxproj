@@ -18,7 +18,9 @@
 		5508D0851D0756CA00DF8FA4 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5508D0841D0756CA00DF8FA4 /* GalleryView.swift */; };
 		5508D0891D0756F800DF8FA4 /* ImageDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5508D0881D0756F800DF8FA4 /* ImageDataManager.swift */; };
 		5508D08B1D0774FB00DF8FA4 /* OrientationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5508D08A1D0774FB00DF8FA4 /* OrientationManager.swift */; };
-		558DD0081D07A52400C81E3A /* HomepageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558DD0071D07A52400C81E3A /* HomepageViewController.swift */; };
+		558DD00E1D07AB2400C81E3A /* HomepageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558DD00D1D07AB2400C81E3A /* HomepageCollectionViewController.swift */; };
+		558DD0101D07ABDE00C81E3A /* HomepageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558DD00F1D07ABDE00C81E3A /* HomepageViewController.swift */; };
+		558DD0121D07D92000C81E3A /* HomepageViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558DD0111D07D92000C81E3A /* HomepageViewControllerTests.swift */; };
 		92CF948A8C412FD02E4EDDC8 /* Pods_Photos_DemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2C84278861BA9A098B909E5 /* Pods_Photos_DemoUITests.framework */; };
 		A311FD5D88897C0EAF4B925E /* Pods_Photos_Demo_Photos_DemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBAFC4150BD8F3E84F30EEA3 /* Pods_Photos_Demo_Photos_DemoTests.framework */; };
 		A5AE0D5A328EDCA3F1F5E3E4 /* Pods_Photos_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60C14B80E087D23A72C22BC1 /* Pods_Photos_Demo.framework */; };
@@ -64,7 +66,9 @@
 		5508D0841D0756CA00DF8FA4 /* GalleryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
 		5508D0881D0756F800DF8FA4 /* ImageDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDataManager.swift; sourceTree = "<group>"; };
 		5508D08A1D0774FB00DF8FA4 /* OrientationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrientationManager.swift; sourceTree = "<group>"; };
-		558DD0071D07A52400C81E3A /* HomepageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomepageViewController.swift; sourceTree = "<group>"; };
+		558DD00D1D07AB2400C81E3A /* HomepageCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomepageCollectionViewController.swift; sourceTree = "<group>"; };
+		558DD00F1D07ABDE00C81E3A /* HomepageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomepageViewController.swift; sourceTree = "<group>"; };
+		558DD0111D07D92000C81E3A /* HomepageViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomepageViewControllerTests.swift; sourceTree = "<group>"; };
 		60C14B80E087D23A72C22BC1 /* Pods_Photos_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Photos_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E07DC079501FE9F9773FF89 /* Pods-Photos-Demo-Photos-DemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Photos-Demo-Photos-DemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Photos-Demo-Photos-DemoTests/Pods-Photos-Demo-Photos-DemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C74648DE2E631999EA098EBE /* Pods-Photos-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Photos-Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Photos-Demo/Pods-Photos-Demo.release.xcconfig"; sourceTree = "<group>"; };
@@ -154,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				5508D0551D06522B00DF8FA4 /* Photos_DemoTests.swift */,
+				558DD0111D07D92000C81E3A /* HomepageViewControllerTests.swift */,
 				5508D0571D06522B00DF8FA4 /* Info.plist */,
 			);
 			path = "Photos-DemoTests";
@@ -180,9 +185,10 @@
 		558DD00A1D07A78200C81E3A /* Homepage */ = {
 			isa = PBXGroup;
 			children = (
-				558DD0071D07A52400C81E3A /* HomepageViewController.swift */,
-				5508D0801D0756A700DF8FA4 /* HomepageCollectionView.swift */,
+				558DD00F1D07ABDE00C81E3A /* HomepageViewController.swift */,
+				558DD00D1D07AB2400C81E3A /* HomepageCollectionViewController.swift */,
 				5508D0821D0756B200DF8FA4 /* HomepageCollectionViewCell.swift */,
+				5508D0801D0756A700DF8FA4 /* HomepageCollectionView.swift */,
 			);
 			name = Homepage;
 			sourceTree = "<group>";
@@ -478,11 +484,12 @@
 			files = (
 				5508D0811D0756A700DF8FA4 /* HomepageCollectionView.swift in Sources */,
 				5508D0851D0756CA00DF8FA4 /* GalleryView.swift in Sources */,
+				558DD00E1D07AB2400C81E3A /* HomepageCollectionViewController.swift in Sources */,
 				5508D08B1D0774FB00DF8FA4 /* OrientationManager.swift in Sources */,
+				558DD0101D07ABDE00C81E3A /* HomepageViewController.swift in Sources */,
 				5508D0891D0756F800DF8FA4 /* ImageDataManager.swift in Sources */,
 				5508D0411D06522B00DF8FA4 /* AppDelegate.swift in Sources */,
 				5508D0831D0756B200DF8FA4 /* HomepageCollectionViewCell.swift in Sources */,
-				558DD0081D07A52400C81E3A /* HomepageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,6 +497,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				558DD0121D07D92000C81E3A /* HomepageViewControllerTests.swift in Sources */,
 				5508D0561D06522B00DF8FA4 /* Photos_DemoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -627,6 +635,7 @@
 			baseConfigurationReference = 0E40F04830CA828395A87F57 /* Pods-Photos-Demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = "Photos-Demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Joseph-Kiley.Photos-Demo";
@@ -639,6 +648,7 @@
 			baseConfigurationReference = C74648DE2E631999EA098EBE /* Pods-Photos-Demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = "Photos-Demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Joseph-Kiley.Photos-Demo";

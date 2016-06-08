@@ -15,15 +15,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        var rootViewController: HomepageViewController = HomepageViewController()
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
-        let navController: UINavigationController = UINavigationController(rootViewController: rootViewController)
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        if let window = window {
-            window.rootViewController = rootViewController
-            window.makeKeyAndVisible()
-        }
+        let initialViewController = storyboard.instantiateViewControllerWithIdentifier("VC")
+        
+        self.window?.rootViewController = initialViewController
+        self.window?.makeKeyAndVisible()
+        
         return true
     }
 }
