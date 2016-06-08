@@ -11,5 +11,4 @@
 
 #import "Haneke.h"
 
-
 #endif /* Photos_Demo_Bridging_Header_h */
