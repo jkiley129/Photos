@@ -21,12 +21,18 @@ class GalleryViewController: UIViewController {
             self.largePhotoView.image = UIImage(named: image)
         }
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: Selector("deletePhoto:"))
         
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - Actions
+    func deletePhoto() {
+        
     }
     
 
