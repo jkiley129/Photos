@@ -14,11 +14,11 @@
 		5508D0561D06522B00DF8FA4 /* Photos_DemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5508D0551D06522B00DF8FA4 /* Photos_DemoTests.swift */; };
 		5508D0611D06522B00DF8FA4 /* Photos_DemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5508D0601D06522B00DF8FA4 /* Photos_DemoUITests.swift */; };
 		5508D0831D0756B200DF8FA4 /* HomepageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5508D0821D0756B200DF8FA4 /* HomepageCollectionViewCell.swift */; };
-		5508D0851D0756CA00DF8FA4 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5508D0841D0756CA00DF8FA4 /* GalleryView.swift */; };
 		5508D0891D0756F800DF8FA4 /* ImageDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5508D0881D0756F800DF8FA4 /* ImageDataManager.swift */; };
 		5508D08B1D0774FB00DF8FA4 /* OrientationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5508D08A1D0774FB00DF8FA4 /* OrientationManager.swift */; };
 		552C70AF1D089E3E00EB1826 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 552C70A01D089C1500EB1826 /* Alamofire.framework */; };
 		552C70B01D089E3E00EB1826 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 552C70A01D089C1500EB1826 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		552C70B51D08B90D00EB1826 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552C70B41D08B90D00EB1826 /* GalleryViewController.swift */; };
 		558DD00E1D07AB2400C81E3A /* HomepageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558DD00D1D07AB2400C81E3A /* HomepageCollectionViewController.swift */; };
 		558DD0101D07ABDE00C81E3A /* HomepageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558DD00F1D07ABDE00C81E3A /* HomepageViewController.swift */; };
 		558DD0121D07D92000C81E3A /* HomepageViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558DD0111D07D92000C81E3A /* HomepageViewControllerTests.swift */; };
@@ -140,10 +140,10 @@
 		5508D0621D06522B00DF8FA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5508D0711D0666D900DF8FA4 /* Photos-Demo-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Photos-Demo-Bridging-Header.h"; sourceTree = "<group>"; };
 		5508D0821D0756B200DF8FA4 /* HomepageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomepageCollectionViewCell.swift; sourceTree = "<group>"; };
-		5508D0841D0756CA00DF8FA4 /* GalleryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
 		5508D0881D0756F800DF8FA4 /* ImageDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDataManager.swift; sourceTree = "<group>"; };
 		5508D08A1D0774FB00DF8FA4 /* OrientationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrientationManager.swift; sourceTree = "<group>"; };
 		552C70951D089C1500EB1826 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = "Alamofire-master/Alamofire.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		552C70B41D08B90D00EB1826 /* GalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		558DD00D1D07AB2400C81E3A /* HomepageCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomepageCollectionViewController.swift; sourceTree = "<group>"; };
 		558DD00F1D07ABDE00C81E3A /* HomepageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomepageViewController.swift; sourceTree = "<group>"; };
 		558DD0111D07D92000C81E3A /* HomepageViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomepageViewControllerTests.swift; sourceTree = "<group>"; };
@@ -289,7 +289,7 @@
 		558DD00B1D07A78700C81E3A /* Gallery */ = {
 			isa = PBXGroup;
 			children = (
-				5508D0841D0756CA00DF8FA4 /* GalleryView.swift */,
+				552C70B41D08B90D00EB1826 /* GalleryViewController.swift */,
 			);
 			name = Gallery;
 			sourceTree = "<group>";
@@ -636,8 +636,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5508D0851D0756CA00DF8FA4 /* GalleryView.swift in Sources */,
 				558DD00E1D07AB2400C81E3A /* HomepageCollectionViewController.swift in Sources */,
+				552C70B51D08B90D00EB1826 /* GalleryViewController.swift in Sources */,
 				5508D08B1D0774FB00DF8FA4 /* OrientationManager.swift in Sources */,
 				558DD0101D07ABDE00C81E3A /* HomepageViewController.swift in Sources */,
 				5508D0891D0756F800DF8FA4 /* ImageDataManager.swift in Sources */,

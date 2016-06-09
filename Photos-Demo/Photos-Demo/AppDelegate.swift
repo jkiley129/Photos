@@ -13,12 +13,10 @@ import Alamofire
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    let themeColor = UIColor(red: 0.01, green: 0.41, blue: 0.22, alpha: 1.0)
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        self.window?.tintColor = self.themeColor
         
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         
@@ -26,6 +24,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()
+        
+        let urlString: String = "https://hingeq-homework.s3.amazonaws.com/client/services/homework.json"
+        
+        Alamofire.request(.GET, urlString) .responseJSON { response in
+            print("The Request is: \(response.request)")  // original URL request
+            print("The Response is: \(response.response)") // URL response
+            print("The Data is: \(response.data)")     // server data
+            print("The Result is: \(response.result)")   // result of response serialization
+            
+            if let JSON = response.result.value {
+                print("JSON: \(JSON)")
+            }
+        }
         
         return true
     }

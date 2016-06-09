@@ -12,7 +12,9 @@ class HomepageCollectionViewController: UICollectionViewController {
     
     // MARK: - Variables
     private let photoReuseID: String = "photoCell"
-    private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
+    private let segueIdentifier: String = "gallerySegue"
+    
+    let photos: [String] = ["Genji", "Overwatch", "Hanzo", "Junkrat", "Mercy", "Pharah", "Reaper", "Reinhardt", "Tracer", "Zenyatta"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,9 +32,20 @@ class HomepageCollectionViewController: UICollectionViewController {
         
         cell.backgroundColor = UIColor.redColor()
         
-        cell.photoView.image = UIImage(named: "Overwatch")
+        cell.photoView.image = UIImage(named: photos[indexPath.item])
         
         return cell
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "gallerySegue" {
+            let indexPath = self.collectionView?.indexPathForCell(sender as! UICollectionViewCell)
+            let destinationVC = segue.destinationViewController as! GalleryViewController
+            if let item = indexPath?.item {
+                let imageNameForIndexPath = photos[item]
+                destinationVC.imageName = imageNameForIndexPath
+            }
+        }
     }
     
 }
