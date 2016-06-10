@@ -12,13 +12,17 @@ class GalleryViewController: UIViewController {
 
     // MARK: - Variables
     @IBOutlet weak var largePhotoView: UIImageView!
-    var imageName: String?
+    var image: ImageItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let image: String = self.imageName {
-            self.largePhotoView.image = UIImage(named: image)
+        if let image: ImageItem = self.image {
+            if let imageData: NSData = image.imageData {
+                self.largePhotoView.image = UIImage(data: imageData)
+            } else {
+                self.configureCellWithImageItem(imageItem: image)
+            }
         }
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: Selector("deletePhoto:"))
@@ -31,6 +35,28 @@ class GalleryViewController: UIViewController {
     }
     
     // MARK: - Actions
+    func configureCellWithImageItem(imageItem imageItem: ImageItem) {
+        if let imageURL: String = imageItem.imageURL {
+            if let url: NSURL = NSURL(string: imageURL) {
+                let request: NSURLRequest = NSURLRequest(URL: url)
+                let mainQueue: NSOperationQueue = NSOperationQueue.mainQueue()
+                NSURLConnection.sendAsynchronousRequest(request, queue: mainQueue, completionHandler: { (response, data, error) in
+                    if error == nil {
+                        if let data = data {
+                            if let image: UIImage = UIImage(data: data) {
+                                imageItem.image = image
+                                imageItem.imageData = data
+                                dispatch_async(dispatch_get_main_queue(), {
+                                    self.largePhotoView.image = image
+                                })
+                            }
+                        }
+                    }
+                })
+            }
+        }
+    }
+    
     func deletePhoto() {
         
     }

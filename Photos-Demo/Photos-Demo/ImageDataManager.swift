@@ -9,9 +9,11 @@
 import UIKit
 import Alamofire
 
+typealias ImageCompletionHandler = (success: Bool, results: [ImageItem]) -> Void
+
 class ImageDataManager: NSObject {
     
-    class func getImageResults() -> [ImageItem] {
+    class func getImageResults(completionHandler completionHandler: ImageCompletionHandler) {
         
         let urlString: String = "https://hinge-homework.s3.amazonaws.com/client/services/homework.json"
         var images: [ImageItem] = [ImageItem]()
@@ -19,15 +21,13 @@ class ImageDataManager: NSObject {
         Alamofire.request(.GET, urlString) .responseJSON { response in
             
             if let JSON = response.result.value as? [[String: AnyObject]] {
-//                print("JSON: \(JSON)")
                 for item in JSON {
                     if let image: ImageItem = ImageItem(JSON: item) {
                         images.append(image)
                     }
                 }
+                completionHandler(success: true, results: images)
             }
         }
-        print(images)
-        return images
     }
 }

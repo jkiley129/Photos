@@ -15,6 +15,7 @@ class ImageItem: NSObject {
     var imageName: String = ""
     var imageDescription: String = ""
     var imageData: NSData?
+    var image: UIImage?
     
     init(imageURL: String, imageName: String, imageDescription: String) {
         self.imageURL = imageURL

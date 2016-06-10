@@ -13,28 +13,38 @@ class HomepageCollectionViewController: UICollectionViewController {
     // MARK: - Variables
     private let photoReuseID: String = "photoCell"
     private let segueIdentifier: String = "gallerySegue"
-    
-    let photos: [String] = ["Genji", "Overwatch", "Hanzo", "Junkrat", "Mercy", "Pharah", "Reaper", "Reinhardt", "Tracer", "Zenyatta"]
+
+    var images: [ImageItem] = [ImageItem]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.greenColor()
         
-        ImageDataManager.getImageResults()
+        ImageDataManager.getImageResults { (success: Bool, results: [ImageItem]) in
+            self.images = results
+            self.reloadCollectionView()
+            print(self.images.count)
+        }
+    }
+    
+    // MARK: - Actions
+    func reloadCollectionView() {
+        self.collectionViewLayout.invalidateLayout()
+        self.collectionView?.reloadData()
     }
     
     // MARK: - CollectionView DataSource
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return self.images.count
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell: HomepageCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(self.photoReuseID, forIndexPath: indexPath) as! HomepageCollectionViewCell
         
-        cell.backgroundColor = UIColor.redColor()
-        
-        cell.photoView.image = UIImage(named: photos[indexPath.item])
+        if self.images.count > indexPath.item {
+            cell.configureCellWithImageItem(imageItem: images[indexPath.item])
+        }
         
         return cell
     }
@@ -44,8 +54,8 @@ class HomepageCollectionViewController: UICollectionViewController {
             let indexPath = self.collectionView?.indexPathForCell(sender as! UICollectionViewCell)
             let destinationVC = segue.destinationViewController as! GalleryViewController
             if let item = indexPath?.item {
-                let imageNameForIndexPath = photos[item]
-                destinationVC.imageName = imageNameForIndexPath
+                let image: ImageItem = self.images[item]
+                destinationVC.image = image
             }
         }
     }
