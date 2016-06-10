@@ -20,6 +20,8 @@ class HomepageCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.greenColor()
+        
+        ImageDataManager.getImageResults()
     }
     
     // MARK: - CollectionView DataSource
