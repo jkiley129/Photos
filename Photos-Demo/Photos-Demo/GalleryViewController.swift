@@ -13,6 +13,7 @@ class GalleryViewController: UIViewController {
 
     // MARK: - Variables
     @IBOutlet weak var largePhotoView: UIImageView!
+    
     var currentImage: ImageItem?
     var totalImages: [ImageItem] = [ImageItem]()
     var galleryTimer: NSTimer = NSTimer()
@@ -29,7 +30,8 @@ class GalleryViewController: UIViewController {
             }
         }
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: Selector("deletePhoto:"))
+        navigationItem.title = "\(self.galleryCount + 1) / \(self.totalImages.count)"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: #selector(GalleryViewController.deletePhoto))
         
         self.scheduleGalleryTimerWithInterval()
         
@@ -66,7 +68,7 @@ class GalleryViewController: UIViewController {
     }
     
     func deletePhoto() {
-        
+        self.totalImages.removeAtIndex(self.galleryCount)
     }
     
     func scheduleGalleryTimerWithInterval() {
@@ -83,6 +85,7 @@ class GalleryViewController: UIViewController {
         if let newImage: ImageItem = self.currentImage {
             self.configureWithImageItem(imageItem: newImage)
         }
+        navigationItem.title = "\(self.galleryCount + 1) / \(self.totalImages.count)"
     }
 
 }
