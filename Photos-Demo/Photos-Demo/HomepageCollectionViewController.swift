@@ -53,9 +53,11 @@ class HomepageCollectionViewController: UICollectionViewController {
         if segue.identifier == "gallerySegue" {
             let indexPath = self.collectionView?.indexPathForCell(sender as! UICollectionViewCell)
             let destinationVC = segue.destinationViewController as! GalleryViewController
-            if let item = indexPath?.item {
+            if let item: Int = indexPath?.item {
                 let image: ImageItem = self.images[item]
-                destinationVC.image = image
+                destinationVC.currentImage = image
+                destinationVC.totalImages = self.images
+                destinationVC.galleryCount = item
             }
         }
     }

@@ -7,25 +7,31 @@
 //
 
 import UIKit
+import Foundation
 
 class GalleryViewController: UIViewController {
 
     // MARK: - Variables
     @IBOutlet weak var largePhotoView: UIImageView!
-    var image: ImageItem?
+    var currentImage: ImageItem?
+    var totalImages: [ImageItem] = [ImageItem]()
+    var galleryTimer: NSTimer = NSTimer()
+    var galleryCount: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let image: ImageItem = self.image {
+        if let image: ImageItem = self.currentImage {
             if let imageData: NSData = image.imageData {
                 self.largePhotoView.image = UIImage(data: imageData)
             } else {
-                self.configureCellWithImageItem(imageItem: image)
+                self.configureWithImageItem(imageItem: image)
             }
         }
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: Selector("deletePhoto:"))
+        
+        self.scheduleGalleryTimerWithInterval()
         
     }
 
@@ -35,8 +41,10 @@ class GalleryViewController: UIViewController {
     }
     
     // MARK: - Actions
-    func configureCellWithImageItem(imageItem imageItem: ImageItem) {
-        if let imageURL: String = imageItem.imageURL {
+    func configureWithImageItem(imageItem imageItem: ImageItem) {
+        if let imageData: NSData = imageItem.imageData {
+            self.largePhotoView.image = UIImage(data: imageData)
+        } else if let imageURL: String = imageItem.imageURL {
             if let url: NSURL = NSURL(string: imageURL) {
                 let request: NSURLRequest = NSURLRequest(URL: url)
                 let mainQueue: NSOperationQueue = NSOperationQueue.mainQueue()
@@ -61,15 +69,20 @@ class GalleryViewController: UIViewController {
         
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func scheduleGalleryTimerWithInterval() {
+        self.galleryTimer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(GalleryViewController.switchToNexPhoto), userInfo: nil, repeats: true)
     }
-    */
+    
+    func switchToNexPhoto() {
+        
+        self.galleryCount += 1
+        if self.galleryCount > self.totalImages.count {
+            self.galleryCount = 0
+        }
+        self.currentImage = self.totalImages[self.galleryCount]
+        if let newImage: ImageItem = self.currentImage {
+            self.configureWithImageItem(imageItem: newImage)
+        }
+    }
 
 }
