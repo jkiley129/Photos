@@ -9,6 +9,10 @@
 import UIKit
 import Foundation
 
+protocol deletePhotoDelegate: class {
+    func deletePhotoFromList(index index: Int)
+}
+
 class GalleryViewController: UIViewController {
 
     // MARK: - Variables

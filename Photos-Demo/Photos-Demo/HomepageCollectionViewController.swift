@@ -82,3 +82,10 @@ extension HomepageCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
     
 }
+
+extension HomepageCollectionViewController: deletePhotoDelegate {
+    
+    func deletePhotoFromList(index index: Int) {
+        self.images.removeAtIndex(index)
+    }
+}
