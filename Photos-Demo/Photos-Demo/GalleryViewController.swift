@@ -76,7 +76,7 @@ class GalleryViewController: UIViewController {
     func switchToNexPhoto() {
         
         self.galleryCount += 1
-        if self.galleryCount > self.totalImages.count {
+        if self.galleryCount > self.totalImages.count - 1 {
             self.galleryCount = 0
         }
         self.currentImage = self.totalImages[self.galleryCount]
