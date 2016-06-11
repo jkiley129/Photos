@@ -13,18 +13,14 @@ class HomepageCollectionViewController: UICollectionViewController {
     // MARK: - Variables
     private let photoReuseID: String = "photoCell"
     private let segueIdentifier: String = "gallerySegue"
-
-    var images: [ImageItem] = [ImageItem]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.greenColor()
         
-        ImageDataManager.getImageResults { (success: Bool, results: [ImageItem]) in
-            self.images = results
+        ImageDataManager.sharedManager.getImageResults { (success, results) in
             self.reloadCollectionView()
-            print(self.images.count)
         }
     }
     
@@ -36,14 +32,14 @@ class HomepageCollectionViewController: UICollectionViewController {
     
     // MARK: - CollectionView DataSource
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.images.count
+        return ImageDataManager.sharedManager.images.count
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell: HomepageCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(self.photoReuseID, forIndexPath: indexPath) as! HomepageCollectionViewCell
         
-        if self.images.count > indexPath.item {
-            cell.configureCellWithImageItem(imageItem: images[indexPath.item])
+        if ImageDataManager.sharedManager.images.count > indexPath.item {
+            cell.loadImage(photo: ImageDataManager.sharedManager.images[indexPath.item])
         }
         
         return cell
@@ -54,9 +50,9 @@ class HomepageCollectionViewController: UICollectionViewController {
             let indexPath = self.collectionView?.indexPathForCell(sender as! UICollectionViewCell)
             let destinationVC = segue.destinationViewController as! GalleryViewController
             if let item: Int = indexPath?.item {
-                let image: ImageItem = self.images[item]
+                let image: ImageItem = ImageDataManager.sharedManager.images[item]
                 destinationVC.currentImage = image
-                destinationVC.totalImages = self.images
+                destinationVC.totalImages = ImageDataManager.sharedManager.images
                 destinationVC.galleryCount = item
             }
         }
@@ -81,11 +77,4 @@ extension HomepageCollectionViewController: UICollectionViewDelegateFlowLayout {
         return 0.0
     }
     
-}
-
-extension HomepageCollectionViewController: deletePhotoDelegate {
-    
-    func deletePhotoFromList(index index: Int) {
-        self.images.removeAtIndex(index)
-    }
 }

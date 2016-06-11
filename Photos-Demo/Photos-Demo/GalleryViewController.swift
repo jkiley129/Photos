@@ -9,10 +9,6 @@
 import UIKit
 import Foundation
 
-protocol deletePhotoDelegate: class {
-    func deletePhotoFromList(index index: Int)
-}
-
 class GalleryViewController: UIViewController {
 
     // MARK: - Variables
@@ -26,12 +22,8 @@ class GalleryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let image: ImageItem = self.currentImage {
-            if let imageData: NSData = image.imageData {
-                self.largePhotoView.image = UIImage(data: imageData)
-            } else {
-                self.configureWithImageItem(imageItem: image)
-            }
+        if let currentImage: ImageItem = self.currentImage {
+            self.loadImage(image: currentImage)
         }
         
         navigationItem.title = "\(self.galleryCount + 1) / \(self.totalImages.count)"
@@ -40,46 +32,33 @@ class GalleryViewController: UIViewController {
         self.scheduleGalleryTimerWithInterval()
         
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     // MARK: - Actions
-    func configureWithImageItem(imageItem imageItem: ImageItem) {
-        if let imageData: NSData = imageItem.imageData {
-            self.largePhotoView.image = UIImage(data: imageData)
-        } else if let imageURL: String = imageItem.imageURL {
-            if let url: NSURL = NSURL(string: imageURL) {
-                let request: NSURLRequest = NSURLRequest(URL: url)
-                let mainQueue: NSOperationQueue = NSOperationQueue.mainQueue()
-                NSURLConnection.sendAsynchronousRequest(request, queue: mainQueue, completionHandler: { (response, data, error) in
-                    if error == nil {
-                        if let data = data {
-                            if let image: UIImage = UIImage(data: data) {
-                                imageItem.image = image
-                                imageItem.imageData = data
-                                dispatch_async(dispatch_get_main_queue(), {
-                                    self.largePhotoView.image = image
-                                })
-                            }
-                        }
-                    }
-                })
-            }
+    func loadImage(image image: ImageItem) {
+        if let cachedImage: UIImage = ImageDataManager.sharedManager.retreiveCachedImage(urlString: image.imageURL) {
+            self.largePhotoView.image = cachedImage
+        } else {
+            self.downloadImage(image: image)
+        }
+    }
+    
+    func downloadImage(image image: ImageItem) {
+        if let urlString: String = image.imageURL {
+            ImageDataManager.sharedManager.getNetworkImage(urlString, completion: { image in
+                self.largePhotoView.image = image
+            })
         }
     }
     
     func deletePhoto() {
-        self.totalImages.removeAtIndex(self.galleryCount)
+        ImageDataManager.sharedManager.images.removeAtIndex(self.galleryCount)
     }
     
     func scheduleGalleryTimerWithInterval() {
-        self.galleryTimer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(GalleryViewController.switchToNexPhoto), userInfo: nil, repeats: true)
+        self.galleryTimer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(GalleryViewController.switchToNextImage), userInfo: nil, repeats: true)
     }
     
-    func switchToNexPhoto() {
+    func switchToNextImage() {
         
         self.galleryCount += 1
         if self.galleryCount > self.totalImages.count - 1 {
@@ -87,7 +66,7 @@ class GalleryViewController: UIViewController {
         }
         self.currentImage = self.totalImages[self.galleryCount]
         if let newImage: ImageItem = self.currentImage {
-            self.configureWithImageItem(imageItem: newImage)
+            self.loadImage(image: newImage)
         }
         navigationItem.title = "\(self.galleryCount + 1) / \(self.totalImages.count)"
     }

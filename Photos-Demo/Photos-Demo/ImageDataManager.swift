@@ -16,22 +16,22 @@ class ImageDataManager: NSObject {
     
     // MARK: - Variables
     static let sharedManager = ImageDataManager()
+    var images = [ImageItem]()
     let photoCache = AutoPurgingImageCache(memoryCapacity: 100 * 1024 * 1024, preferredMemoryUsageAfterPurge: 60 * 1024 * 1024)
     
     func getImageResults(completionHandler completionHandler: ImageCompletionHandler) {
         
         let urlString: String = "https://hinge-homework.s3.amazonaws.com/client/services/homework.json"
-        var images: [ImageItem] = [ImageItem]()
         
         Alamofire.request(.GET, urlString) .responseJSON { response in
             
             if let JSON = response.result.value as? [[String: AnyObject]] {
                 for item in JSON {
                     if let image: ImageItem = ImageItem(JSON: item) {
-                        images.append(image)
+                        self.images.append(image)
                     }
                 }
-                completionHandler(success: true, results: images)
+                completionHandler(success: true, results: self.images)
             }
         }
     }
@@ -40,7 +40,7 @@ class ImageDataManager: NSObject {
         return Alamofire.request(.GET, urlString).responseImage { (response) -> Void in
             guard let image = response.result.value else { return }
             completion(image)
-            
+            self.cacheImage(image: image, urlString: urlString)
         }
     }
     
