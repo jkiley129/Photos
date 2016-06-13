@@ -15,7 +15,6 @@ class GalleryViewController: UIViewController {
     @IBOutlet weak var largePhotoView: UIImageView!
     
     var currentImage: ImageItem?
-    var totalImages: [ImageItem] = [ImageItem]()
     var galleryTimer: NSTimer = NSTimer()
     var galleryCount: Int = 0
     
@@ -26,7 +25,7 @@ class GalleryViewController: UIViewController {
             self.loadImage(image: currentImage)
         }
         
-        navigationItem.title = "\(self.galleryCount + 1) / \(self.totalImages.count)"
+        navigationItem.title = "\(self.galleryCount + 1) / \(ImageDataManager.sharedManager.images.count)"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: #selector(GalleryViewController.deletePhoto))
         
         self.scheduleGalleryTimerWithInterval()
@@ -61,14 +60,14 @@ class GalleryViewController: UIViewController {
     func switchToNextImage() {
         
         self.galleryCount += 1
-        if self.galleryCount > self.totalImages.count - 1 {
+        if self.galleryCount > ImageDataManager.sharedManager.images.count - 1 {
             self.galleryCount = 0
         }
-        self.currentImage = self.totalImages[self.galleryCount]
+        self.currentImage = ImageDataManager.sharedManager.images[self.galleryCount]
         if let newImage: ImageItem = self.currentImage {
             self.loadImage(image: newImage)
         }
-        navigationItem.title = "\(self.galleryCount + 1) / \(self.totalImages.count)"
+        navigationItem.title = "\(self.galleryCount + 1) / \(ImageDataManager.sharedManager.images.count)"
     }
 
 }

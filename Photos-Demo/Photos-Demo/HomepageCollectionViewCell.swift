@@ -7,25 +7,56 @@
 //
 
 import UIKit
+import ImageIO
+import Alamofire
+import AlamofireImage
 
 class HomepageCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Variables
     @IBOutlet weak var photoView: UIImageView!
+    var imageItem: ImageItem?
+    var request: Request?
     
-    // MARK: - Actions
-    func loadImage(photo photo: ImageItem) {
-        if let cachedImage: UIImage = ImageDataManager.sharedManager.retreiveCachedImage(urlString: photo.imageURL) {
-            self.photoView.image = cachedImage
-        } else {
-            self.downloadPhoto(photo: photo)
+    // MARK: - Reuse
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.photoView.image = nil
+    }
+    
+    // MARK: - Cell Configuration
+    func configureHomepageCell(imageItem imageItem: ImageItem) {
+        self.imageItem = imageItem
+        self.reset()
+        self.loadImage()
+    }
+    
+    func reset() {
+        self.photoView.image = nil
+        request?.cancel()
+    }
+    
+    // MARK: - Image Handling
+    func loadImage() {
+        if let image: ImageItem = self.imageItem {
+            if let cachedImage = ImageDataManager.sharedManager.retreiveCachedImage(urlString: image.imageURL) {
+                self.photoView.image = cachedImage
+            } else {
+                self.downloadImage()
+            }
         }
     }
     
-    func downloadPhoto(photo photo: ImageItem) {
-        if let urlString: String = photo.imageURL {
-            ImageDataManager.sharedManager.getNetworkImage(urlString, completion: { image in
-                self.photoView.image = image
+    func downloadImage() {
+        if let urlString: String = self.imageItem?.imageURL {
+            request = ImageDataManager.sharedManager.getNetworkImage(urlString, completion: { image in
+                if let image: UIImage = image {
+                    self.photoView.image = image
+                    if let imageItem: ImageItem = self.imageItem {
+                        ImageDataManager.sharedManager.cacheImage(image: image, urlString: imageItem.imageURL)
+                    }
+                }
             })
         }
     }

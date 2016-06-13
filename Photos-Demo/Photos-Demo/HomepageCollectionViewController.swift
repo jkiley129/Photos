@@ -39,7 +39,8 @@ class HomepageCollectionViewController: UICollectionViewController {
         let cell: HomepageCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(self.photoReuseID, forIndexPath: indexPath) as! HomepageCollectionViewCell
         
         if ImageDataManager.sharedManager.images.count > indexPath.item {
-            cell.loadImage(photo: ImageDataManager.sharedManager.images[indexPath.item])
+            let selectedImageItem: ImageItem = ImageDataManager.sharedManager.images[indexPath.item]
+            cell.configureHomepageCell(imageItem: selectedImageItem)
         }
         
         return cell
@@ -52,7 +53,6 @@ class HomepageCollectionViewController: UICollectionViewController {
             if let item: Int = indexPath?.item {
                 let image: ImageItem = ImageDataManager.sharedManager.images[item]
                 destinationVC.currentImage = image
-                destinationVC.totalImages = ImageDataManager.sharedManager.images
                 destinationVC.galleryCount = item
             }
         }
