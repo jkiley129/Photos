@@ -22,7 +22,9 @@ class GalleryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.loadImage()
+        if let currentImage: ImageItem = self.currentImage {
+            self.configureGalleryView(imageItem: currentImage)
+        }
         
         navigationItem.title = "\(self.galleryCount + 1) / \(ImageDataManager.sharedManager.images.count)"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: #selector(GalleryViewController.deletePhoto))
@@ -46,8 +48,8 @@ class GalleryViewController: UIViewController {
     // MARK: - Image Handling
     func loadImage() {
         if let image: ImageItem = self.currentImage {
-            if let cachedImage = ImageDataManager.sharedManager.retreiveCachedImage(urlString: image.imageURL) {
-                self.largePhotoView.image = cachedImage
+            if let cachedImage: NSData = ImageDataManager.sharedManager.retrieveCachedImage(urlString: image.imageURL) {
+                self.largePhotoView.image = UIImage(data: cachedImage)
             } else {
                 self.downloadImage()
             }
@@ -56,14 +58,17 @@ class GalleryViewController: UIViewController {
     
     func downloadImage() {
         if let urlString: String = self.currentImage?.imageURL {
-            request = ImageDataManager.sharedManager.getNetworkImage(urlString, completion: { image in
-                if let image: UIImage = image {
-                    self.largePhotoView.image = image
-                    if let imageItem: ImageItem = self.currentImage {
-                        ImageDataManager.sharedManager.cacheImage(image: image, urlString: imageItem.imageURL)
-                    }
-                }
-            })
+            if let URL: NSURL = NSURL(string: urlString) {
+                self.largePhotoView.hnk_setImageFromURL(URL)
+            }
+//            request = ImageDataManager.sharedManager.getNetworkImage(urlString, completion: { image in
+//                if let image: UIImage = image {
+//                    self.largePhotoView.image = image
+//                    if let imageItem: ImageItem = self.currentImage {
+//                        ImageDataManager.sharedManager.cacheImage(imageItem: imageItem)
+//                    }
+//                }
+//            })
         }
     }
     

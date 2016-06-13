@@ -53,7 +53,6 @@ class HomepageCollectionViewController: UICollectionViewController {
             if let item: Int = indexPath?.item {
                 let image: ImageItem = ImageDataManager.sharedManager.images[item]
                 destinationVC.currentImage = image
-                destinationVC.configureGalleryView(imageItem: image)
             }
         }
     }
