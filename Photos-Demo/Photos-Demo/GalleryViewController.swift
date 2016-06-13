@@ -15,15 +15,14 @@ class GalleryViewController: UIViewController {
     @IBOutlet weak var largePhotoView: UIImageView!
     
     var currentImage: ImageItem?
+    var request: ImageRequest?
     var galleryTimer: NSTimer = NSTimer()
     var galleryCount: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let currentImage: ImageItem = self.currentImage {
-            self.loadImage(image: currentImage)
-        }
+        self.loadImage()
         
         navigationItem.title = "\(self.galleryCount + 1) / \(ImageDataManager.sharedManager.images.count)"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: #selector(GalleryViewController.deletePhoto))
@@ -32,23 +31,43 @@ class GalleryViewController: UIViewController {
         
     }
     
-    // MARK: - Actions
-    func loadImage(image image: ImageItem) {
-        if let cachedImage: UIImage = ImageDataManager.sharedManager.retreiveCachedImage(urlString: image.imageURL) {
-            self.largePhotoView.image = cachedImage
-        } else {
-            self.downloadImage(image: image)
+    // MARK: - Cell Configuration
+    func configureGalleryView(imageItem imageItem: ImageItem) {
+        self.currentImage = imageItem
+        self.reset()
+        self.loadImage()
+    }
+    
+    func reset() {
+        self.largePhotoView.image = nil
+        request?.cancel()
+    }
+    
+    // MARK: - Image Handling
+    func loadImage() {
+        if let image: ImageItem = self.currentImage {
+            if let cachedImage = ImageDataManager.sharedManager.retreiveCachedImage(urlString: image.imageURL) {
+                self.largePhotoView.image = cachedImage
+            } else {
+                self.downloadImage()
+            }
         }
     }
     
-    func downloadImage(image image: ImageItem) {
-        if let urlString: String = image.imageURL {
-            ImageDataManager.sharedManager.getNetworkImage(urlString, completion: { image in
-                self.largePhotoView.image = image
+    func downloadImage() {
+        if let urlString: String = self.currentImage?.imageURL {
+            request = ImageDataManager.sharedManager.getNetworkImage(urlString, completion: { image in
+                if let image: UIImage = image {
+                    self.largePhotoView.image = image
+                    if let imageItem: ImageItem = self.currentImage {
+                        ImageDataManager.sharedManager.cacheImage(image: image, urlString: imageItem.imageURL)
+                    }
+                }
             })
         }
     }
     
+    // MARK: - Actions
     func deletePhoto() {
         ImageDataManager.sharedManager.images.removeAtIndex(self.galleryCount)
     }
@@ -64,9 +83,7 @@ class GalleryViewController: UIViewController {
             self.galleryCount = 0
         }
         self.currentImage = ImageDataManager.sharedManager.images[self.galleryCount]
-        if let newImage: ImageItem = self.currentImage {
-            self.loadImage(image: newImage)
-        }
+        self.loadImage()
         navigationItem.title = "\(self.galleryCount + 1) / \(ImageDataManager.sharedManager.images.count)"
     }
 

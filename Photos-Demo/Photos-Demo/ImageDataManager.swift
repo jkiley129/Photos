@@ -49,22 +49,14 @@ class ImageDataManager: NSObject {
                 guard let image = response.result.value else {
                     return
                 }
-                let decodeOperation = self.decodeImage(image) { image in
+                let decodeOperation = self.decodeImage(image: image) { image in
                     completion(image)
-                    self.cacheImage(image, urlString: urlString)
+                    self.cacheImage(image: image, urlString: urlString)
                 }
                 imageRequest.decodeOperation = decodeOperation
             }
         )
         return imageRequest
-            
-            
-            
-//        return Alamofire.request(.GET, urlString).responseImage { (response) -> Void in
-//            guard let image = response.result.value else { return }
-//            completion(image)
-//            self.cacheImage(image: image, urlString: urlString)
-//        }
     }
     
     func decodeImage(image image: UIImage, completion: (UIImage -> Void)) -> DecodeOperation {

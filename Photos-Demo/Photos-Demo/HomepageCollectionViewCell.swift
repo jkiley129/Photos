@@ -16,7 +16,7 @@ class HomepageCollectionViewCell: UICollectionViewCell {
     // MARK: - Variables
     @IBOutlet weak var photoView: UIImageView!
     var imageItem: ImageItem?
-    var request: Request?
+    var request: ImageRequest?
     
     // MARK: - Reuse
     override func prepareForReuse() {
