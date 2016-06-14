@@ -24,6 +24,12 @@ class HomepageCollectionViewController: UICollectionViewController {
         }
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.reloadCollectionView()
+    }
+    
     // MARK: - Actions
     func reloadCollectionView() {
         self.collectionViewLayout.invalidateLayout()
@@ -40,7 +46,7 @@ class HomepageCollectionViewController: UICollectionViewController {
         
         if ImageDataManager.sharedManager.images.count > indexPath.item {
             let selectedImageItem: ImageItem = ImageDataManager.sharedManager.images[indexPath.item]
-            cell.configureHomepageCell(imageItem: selectedImageItem)
+            cell.downloadImage(imageItem: selectedImageItem)
         }
         
         return cell
@@ -53,6 +59,7 @@ class HomepageCollectionViewController: UICollectionViewController {
             if let item: Int = indexPath?.item {
                 let image: ImageItem = ImageDataManager.sharedManager.images[item]
                 destinationVC.currentImage = image
+                destinationVC.galleryCount = item
             }
         }
     }

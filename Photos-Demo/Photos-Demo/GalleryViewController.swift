@@ -15,7 +15,6 @@ class GalleryViewController: UIViewController {
     @IBOutlet weak var largePhotoView: UIImageView!
     
     var currentImage: ImageItem?
-    var request: ImageRequest?
     var galleryTimer: NSTimer = NSTimer()
     var galleryCount: Int = 0
     
@@ -23,7 +22,7 @@ class GalleryViewController: UIViewController {
         super.viewDidLoad()
         
         if let currentImage: ImageItem = self.currentImage {
-            self.configureGalleryView(imageItem: currentImage)
+            self.downloadImage(imageItem: currentImage)
         }
         
         navigationItem.title = "\(self.galleryCount + 1) / \(ImageDataManager.sharedManager.images.count)"
@@ -33,42 +32,13 @@ class GalleryViewController: UIViewController {
         
     }
     
-    // MARK: - Cell Configuration
-    func configureGalleryView(imageItem imageItem: ImageItem) {
-        self.currentImage = imageItem
-        self.reset()
-        self.loadImage()
-    }
-    
-    func reset() {
-        self.largePhotoView.image = nil
-        request?.cancel()
-    }
-    
     // MARK: - Image Handling
-    func loadImage() {
-        if let image: ImageItem = self.currentImage {
-            if let cachedImage: NSData = ImageDataManager.sharedManager.retrieveCachedImage(urlString: image.imageURL) {
-                self.largePhotoView.image = UIImage(data: cachedImage)
-            } else {
-                self.downloadImage()
-            }
-        }
-    }
-    
-    func downloadImage() {
-        if let urlString: String = self.currentImage?.imageURL {
+    func downloadImage(imageItem imageItem: ImageItem) {
+        self.largePhotoView.image = nil
+        if let urlString: String = imageItem.imageURL {
             if let URL: NSURL = NSURL(string: urlString) {
                 self.largePhotoView.hnk_setImageFromURL(URL)
             }
-//            request = ImageDataManager.sharedManager.getNetworkImage(urlString, completion: { image in
-//                if let image: UIImage = image {
-//                    self.largePhotoView.image = image
-//                    if let imageItem: ImageItem = self.currentImage {
-//                        ImageDataManager.sharedManager.cacheImage(imageItem: imageItem)
-//                    }
-//                }
-//            })
         }
     }
     
@@ -79,17 +49,40 @@ class GalleryViewController: UIViewController {
     
     func scheduleGalleryTimerWithInterval() {
         self.galleryTimer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(GalleryViewController.switchToNextImage), userInfo: nil, repeats: true)
+        self.animateImageTransition()
     }
     
     func switchToNextImage() {
-        
         self.galleryCount += 1
         if self.galleryCount > ImageDataManager.sharedManager.images.count - 1 {
             self.galleryCount = 0
         }
         self.currentImage = ImageDataManager.sharedManager.images[self.galleryCount]
-        self.loadImage()
+        if let currentImage: ImageItem = self.currentImage {
+            self.downloadImage(imageItem: currentImage)
+        }
         navigationItem.title = "\(self.galleryCount + 1) / \(ImageDataManager.sharedManager.images.count)"
+    }
+    
+    func animateImageTransition() {
+        CATransaction.begin()
+        
+        let animationDuration: NSTimeInterval = 0.25
+        let switchTimeInterval: NSTimeInterval = 2.0
+        CATransaction.setAnimationDuration(animationDuration)
+        CATransaction.setCompletionBlock { 
+            let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(switchTimeInterval * NSTimeInterval(NSEC_PER_SEC)))
+            dispatch_after(delay, dispatch_get_main_queue(), { 
+                self.animateImageTransition()
+            })
+        }
+        
+        let transition = CATransition()
+        transition.type = kCATransitionFade
+        self.largePhotoView.layer.addAnimation(transition, forKey: kCATransition)
+        self.switchToNextImage()
+        
+        CATransaction.commit()
     }
 
 }
