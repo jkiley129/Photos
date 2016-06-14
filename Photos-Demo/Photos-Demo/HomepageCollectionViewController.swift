@@ -19,8 +19,13 @@ class HomepageCollectionViewController: UICollectionViewController {
         
         self.view.backgroundColor = UIColor.greenColor()
         
-        ImageDataManager.sharedManager.getImageResults { (success, results) in
-            self.reloadCollectionView()
+        if Reachability.isConnectedToNetwork() == true {
+            ImageDataManager.sharedManager.getImageResults { (success, results) in
+                self.reloadCollectionView()
+            }
+        } else {
+            self.collectionView?.hidden = true
+            self.addNoDataConnectionLabel()
         }
     }
     
@@ -34,6 +39,18 @@ class HomepageCollectionViewController: UICollectionViewController {
     func reloadCollectionView() {
         self.collectionViewLayout.invalidateLayout()
         self.collectionView?.reloadData()
+    }
+    
+    func addNoDataConnectionLabel() {
+        let noDataConnectionLabel: UILabel = UILabel()
+        noDataConnectionLabel.text = "Looks like you're not connected to the internet. Please connect to view photo content"
+        noDataConnectionLabel.numberOfLines = 0
+        noDataConnectionLabel.lineBreakMode = .ByWordWrapping
+        let labelWidth: Double = OrientationManager.deviceWidth() - 16.0
+        let labelHeight: Double = OrientationManager.deviceHeight() / 2.0
+        let x: Double = 8.0; var y: Double = (OrientationManager.deviceHeight() - labelHeight) / 2.0; let w: Double = labelWidth; var h: Double = labelHeight
+        noDataConnectionLabel.frame = CGRect(x: x, y: y, width: w, height: h)
+        self.view.addSubview(noDataConnectionLabel)
     }
     
     // MARK: - CollectionView DataSource
