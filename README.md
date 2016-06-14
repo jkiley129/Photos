@@ -2,6 +2,7 @@
 
 This app showcases some image handling techniques to create a photo-viewing app. The app will take image URL's as provided by a JSON feed, convert those URL’s and display as images. The app makes use of Alamofire to handle asynchronous requests for JSON objects as well as Haneke for image caching and image downloading on the background thread. 
 
+
 TESTING
 
 The app has a very simple user interface, here are some steps to ensure that the app is working as designed:
