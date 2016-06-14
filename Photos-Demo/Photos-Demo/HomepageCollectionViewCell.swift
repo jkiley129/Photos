@@ -21,23 +21,10 @@ class HomepageCollectionViewCell: UICollectionViewCell {
     // MARK: - Reuse
     override func prepareForReuse() {
         super.prepareForReuse()
-        
         self.photoView.image = nil
     }
     
     // MARK: - Image Handling
-//    func loadImage(imageItem imageItem: ImageItem) {
-//        if let urlString: String = imageItem.imageURL {
-//            ImageDataManager.sharedManager.retrieveCachedImage(urlString: urlString, completionHandler: { (success: Bool, result: NSData) in
-//                if success != false {
-//                    self.photoView.image = UIImage(data: result)
-//                } else {
-//                    self.downloadImage(imageItem: imageItem)
-//                }
-//            })
-//        }
-//    }
-    
     func downloadImage(imageItem imageItem: ImageItem) {
         if let urlString: String = imageItem.imageURL {
             if let URL: NSURL = NSURL(string: urlString) {

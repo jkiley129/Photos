@@ -49,6 +49,7 @@ class GalleryViewController: UIViewController {
     // MARK: - Actions
     func deletePhoto() {
         ImageDataManager.sharedManager.images.removeAtIndex(self.galleryCount)
+        self.view.reloadInputViews()
     }
     
     func switchToNextImage() {

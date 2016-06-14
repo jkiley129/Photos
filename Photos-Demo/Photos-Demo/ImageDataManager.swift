@@ -42,7 +42,7 @@ class ImageDataManager: NSObject {
     // MARK: - Image Caching
     func cacheImage(imageItem imageItem: ImageItem) {
         if let imageData: NSData = imageItem.imageData {
-            self.cache.set(value: imageData, key: imageItem.description)
+            self.cache.set(value: imageData, key: imageItem.imageURL)
             print("\(imageItem.imageDescription) has been cached!")
         }
     }

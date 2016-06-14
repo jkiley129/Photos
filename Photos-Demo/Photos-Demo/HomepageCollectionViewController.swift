@@ -17,21 +17,21 @@ class HomepageCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.greenColor()
-        
         if Reachability.isConnectedToNetwork() == true {
             ImageDataManager.sharedManager.getImageResults { (success, results) in
                 self.reloadCollectionView()
             }
-        } else {
+        } else if Reachability.isConnectedToNetwork() == false && ImageDataManager.sharedManager.images.count == 0 {
             self.collectionView?.hidden = true
             self.addNoDataConnectionLabel()
+        } else {
+            self.reloadCollectionView()
         }
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
+        self.view.backgroundColor = UIColor.whiteColor()
         self.reloadCollectionView()
     }
     
@@ -48,7 +48,7 @@ class HomepageCollectionViewController: UICollectionViewController {
         noDataConnectionLabel.lineBreakMode = .ByWordWrapping
         let labelWidth: Double = OrientationManager.deviceWidth() - 16.0
         let labelHeight: Double = OrientationManager.deviceHeight() / 2.0
-        let x: Double = 8.0; var y: Double = (OrientationManager.deviceHeight() - labelHeight) / 2.0; let w: Double = labelWidth; var h: Double = labelHeight
+        let x: Double = 8.0; let y: Double = (OrientationManager.deviceHeight() - labelHeight) / 2.0; let w: Double = labelWidth; let h: Double = labelHeight
         noDataConnectionLabel.frame = CGRect(x: x, y: y, width: w, height: h)
         self.view.addSubview(noDataConnectionLabel)
     }
