@@ -13,7 +13,7 @@ TESTING
 
 The app has a very simple user interface, here are some steps to ensure that the app is working as designed:
 
-1.	Run the app to see the homepage. A UICollectionView will populate with images from the network shortly after opening. The speed of the images appearing will depend on your network connection.
+1.	Run the app to see the homepage. A UICollectionView will populate with images from the network shortly after opening. The speed of the images appearing will depend on your network connection. Scrolling through the collection view should be a very smooth experience.
 2.	Tap on an image and you will be taken to the Gallery view. The Gallery view should show you a larger view of the image you just tapped on
 3.	Every 2 seconds, the Gallery view will transition to the next photo in the list. The counter at the top of the screen will show your current position in the range of photos.
 4.	Hitting the trash icon in the top right of the screen will delete the image that is currently showing in the Gallery view.
