@@ -46,14 +46,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let remoteHostStatus = networkReachability.currentReachabilityStatus()
             
             if (remoteHostStatus == NotReachable) {
-                print("Shit just isn't reachable")
+                print("App isn't reachable")
             } else if (remoteHostStatus == ReachableViaWiFi) {
-                print("Shit is only reachable via WIFI")
+                print("App is only reachable via WIFI")
             } else {
-                print("Shit is just plain reachable!")
+                print("App is just plain reachable!")
             }
         } else {
-            print("I ain't got no god damn clue what's going on")
+            print("I ain't got no clue what's going on")
         }
     }
     

@@ -74,16 +74,15 @@
 		5508D05C1D06522B00DF8FA4 /* Photos-DemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Photos-DemoUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5508D0601D06522B00DF8FA4 /* Photos_DemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos_DemoUITests.swift; sourceTree = "<group>"; };
 		5508D0621D06522B00DF8FA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5508D0711D0666D900DF8FA4 /* Photos-Demo-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Photos-Demo-Bridging-Header.h"; sourceTree = "<group>"; };
 		5508D0821D0756B200DF8FA4 /* HomepageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomepageCollectionViewCell.swift; sourceTree = "<group>"; };
 		5508D0881D0756F800DF8FA4 /* ImageDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDataManager.swift; sourceTree = "<group>"; };
 		5508D08A1D0774FB00DF8FA4 /* OrientationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrientationManager.swift; sourceTree = "<group>"; };
 		552C70B41D08B90D00EB1826 /* GalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		558DD00D1D07AB2400C81E3A /* HomepageCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomepageCollectionViewController.swift; sourceTree = "<group>"; };
 		558DD0111D07D92000C81E3A /* HomepageViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomepageViewControllerTests.swift; sourceTree = "<group>"; };
-		55B0AE5B1D108D8800714E55 /* Photos-Demo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Photos-Demo-Bridging-Header.h"; sourceTree = "<group>"; };
 		55B0AE5C1D108D8900714E55 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		55B0AE5D1D108D8900714E55 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		55B0AE601D10C07B00714E55 /* Photos-Demo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Photos-Demo-Bridging-Header.h"; sourceTree = "<group>"; };
 		60C14B80E087D23A72C22BC1 /* Pods_Photos_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Photos_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E07DC079501FE9F9773FF89 /* Pods-Photos-Demo-Photos-DemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Photos-Demo-Photos-DemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Photos-Demo-Photos-DemoTests/Pods-Photos-Demo-Photos-DemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C74648DE2E631999EA098EBE /* Pods-Photos-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Photos-Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Photos-Demo/Pods-Photos-Demo.release.xcconfig"; sourceTree = "<group>"; };
@@ -164,7 +163,7 @@
 				5508D0471D06522B00DF8FA4 /* Assets.xcassets */,
 				5508D0491D06522B00DF8FA4 /* LaunchScreen.storyboard */,
 				5508D04C1D06522B00DF8FA4 /* Info.plist */,
-				5508D0711D0666D900DF8FA4 /* Photos-Demo-Bridging-Header.h */,
+				55B0AE601D10C07B00714E55 /* Photos-Demo-Bridging-Header.h */,
 			);
 			path = "Photos-Demo";
 			sourceTree = "<group>";
@@ -222,7 +221,6 @@
 				5508D08A1D0774FB00DF8FA4 /* OrientationManager.swift */,
 				55B0AE5C1D108D8900714E55 /* Reachability.h */,
 				55B0AE5D1D108D8900714E55 /* Reachability.m */,
-				55B0AE5B1D108D8800714E55 /* Photos-Demo-Bridging-Header.h */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
