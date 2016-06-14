@@ -1,6 +1,12 @@
 # Photos
 
-This app showcases some image handling techniques to create a photo-viewing app. The app will take image URL's as provided by a JSON feed, convert those URL’s and display as images. The app makes use of Alamofire to handle asynchronous requests for JSON objects as well as Haneke for image caching and image downloading on the background thread. 
+This app showcases some image handling techniques to create a photo-viewing app. The app will take image URL's as provided by a JSON feed, convert those URL’s and display as images. The app makes use of Alamofire to handle asynchronous requests for JSON objects as well as Haneke for image caching and image downloading on the background thread.
+
+RUNNING THE APP
+
+To run the app, please clone this repo or download the project as a ZIP file. Once the project is opened in Xcode, connect an iPhone, and hit the hotkey "Command + R" to run the app (you can also hit the play button in the top left corner of the Xcode window) . Xcode will prompt you to unlock your phone if it is currently locked and will open the app once it has installed and compiled on your device. Once it is running proceed to testing the app's functionality. Steps to test the app are provided below.
+
+For best results, please run the app on an iPhone.
 
 
 TESTING
