@@ -15,5 +15,5 @@ The app has a very simple user interface, here are some steps to ensure that the
 6.	If you lose network connectivity after loading images from the network, the app will continue to display any images that were previously downloaded
 7.	If the app is initially started without a network connection, you a label will appear on screen asking you to reconnect to the Internet.
 
-I hope you enjoy using the app!
+I hope you enjoy using the app! Any and all comments and suggestions are more than welcome!
 
