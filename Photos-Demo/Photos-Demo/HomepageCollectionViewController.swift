@@ -13,19 +13,18 @@ class HomepageCollectionViewController: UICollectionViewController {
     // MARK: - Variables
     private let photoReuseID: String = "photoCell"
     private let segueIdentifier: String = "gallerySegue"
+    let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if Reachability.isConnectedToNetwork() == true {
+        if (self.delegate.networkStatus != ReachabilityStatus.NotReachable) {
             ImageDataManager.sharedManager.getImageResults { (success, results) in
                 self.reloadCollectionView()
             }
-        } else if Reachability.isConnectedToNetwork() == false && ImageDataManager.sharedManager.images.count == 0 {
+        } else {
             self.collectionView?.hidden = true
             self.addNoDataConnectionLabel()
-        } else {
-            self.reloadCollectionView()
         }
     }
     

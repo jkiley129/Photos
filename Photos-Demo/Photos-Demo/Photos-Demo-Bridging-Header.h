@@ -9,6 +9,6 @@
 #ifndef Photos_Demo_Bridging_Header_h
 #define Photos_Demo_Bridging_Header_h
 
-#import "Haneke.h"
+#import "Reachability.h"
 
 #endif /* Photos_Demo_Bridging_Header_h */
