@@ -32,7 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
         
         return true
-        
     }
     
     class func checkNetworkStatus() -> Bool {

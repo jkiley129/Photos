@@ -38,6 +38,7 @@ class GalleryViewController: UIViewController {
     }
     
     // MARK: - Image Handling
+    // Note: Haneke automatically caches the image, by calling this again once the image has been downloaded, I am just directing it which image to use
     func downloadImage(imageItem imageItem: ImageItem) {
         if let urlString: String = imageItem.imageURL {
             if let URL: NSURL = NSURL(string: urlString) {

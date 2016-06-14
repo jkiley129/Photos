@@ -13,7 +13,6 @@ class HomepageCollectionViewController: UICollectionViewController {
     // MARK: - Variables
     private let photoReuseID: String = "photoCell"
     private let segueIdentifier: String = "gallerySegue"
-    let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
