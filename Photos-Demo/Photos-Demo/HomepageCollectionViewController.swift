@@ -18,7 +18,7 @@ class HomepageCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if (self.delegate.networkStatus != ReachabilityStatus.NotReachable) {
+        if AppDelegate.checkNetworkStatus() == true {
             ImageDataManager.sharedManager.getImageResults { (success, results) in
                 self.reloadCollectionView()
             }
