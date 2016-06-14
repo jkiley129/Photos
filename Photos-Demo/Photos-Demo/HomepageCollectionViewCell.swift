@@ -26,17 +26,17 @@ class HomepageCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Image Handling
-    func loadImage(imageItem imageItem: ImageItem) {
-        if let urlString: String = imageItem.imageURL {
-            ImageDataManager.sharedManager.retrieveCachedImage(urlString: urlString, completionHandler: { (success: Bool, result: NSData) in
-                if success != false {
-                    self.photoView.image = UIImage(data: result)
-                } else {
-                    self.downloadImage(imageItem: imageItem)
-                }
-            })
-        }
-    }
+//    func loadImage(imageItem imageItem: ImageItem) {
+//        if let urlString: String = imageItem.imageURL {
+//            ImageDataManager.sharedManager.retrieveCachedImage(urlString: urlString, completionHandler: { (success: Bool, result: NSData) in
+//                if success != false {
+//                    self.photoView.image = UIImage(data: result)
+//                } else {
+//                    self.downloadImage(imageItem: imageItem)
+//                }
+//            })
+//        }
+//    }
     
     func downloadImage(imageItem imageItem: ImageItem) {
         if let urlString: String = imageItem.imageURL {

@@ -57,8 +57,8 @@ class HomepageCollectionViewController: UICollectionViewController {
             let indexPath = self.collectionView?.indexPathForCell(sender as! UICollectionViewCell)
             let destinationVC = segue.destinationViewController as! GalleryViewController
             if let item: Int = indexPath?.item {
-                let image: ImageItem = ImageDataManager.sharedManager.images[item]
-                destinationVC.currentImage = image
+                let currentImage: ImageItem = ImageDataManager.sharedManager.images[item]
+                destinationVC.currentImageItem = currentImage
                 destinationVC.galleryCount = item
             }
         }

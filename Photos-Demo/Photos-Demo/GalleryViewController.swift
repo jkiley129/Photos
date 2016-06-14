@@ -13,28 +13,33 @@ class GalleryViewController: UIViewController {
 
     // MARK: - Variables
     @IBOutlet weak var largePhotoView: UIImageView!
-    
-    var currentImage: ImageItem?
-    var galleryTimer: NSTimer = NSTimer()
+
+    var currentImageItem: ImageItem?
     var galleryCount: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let currentImage: ImageItem = self.currentImage {
-            self.downloadImage(imageItem: currentImage)
-        }
+        self.view.backgroundColor = UIColor.blueColor()
         
         navigationItem.title = "\(self.galleryCount + 1) / \(ImageDataManager.sharedManager.images.count)"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: #selector(GalleryViewController.deletePhoto))
         
-        self.scheduleGalleryTimerWithInterval()
+        if let currentImage: ImageItem = self.currentImageItem {
+            self.downloadImage(imageItem: currentImage)
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (__int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), {
+            self.animateImageTransition()
+        });
         
     }
     
     // MARK: - Image Handling
     func downloadImage(imageItem imageItem: ImageItem) {
-        self.largePhotoView.image = nil
         if let urlString: String = imageItem.imageURL {
             if let URL: NSURL = NSURL(string: urlString) {
                 self.largePhotoView.hnk_setImageFromURL(URL)
@@ -47,27 +52,22 @@ class GalleryViewController: UIViewController {
         ImageDataManager.sharedManager.images.removeAtIndex(self.galleryCount)
     }
     
-    func scheduleGalleryTimerWithInterval() {
-        self.galleryTimer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(GalleryViewController.switchToNextImage), userInfo: nil, repeats: true)
-        self.animateImageTransition()
-    }
-    
     func switchToNextImage() {
         self.galleryCount += 1
         if self.galleryCount > ImageDataManager.sharedManager.images.count - 1 {
             self.galleryCount = 0
         }
-        self.currentImage = ImageDataManager.sharedManager.images[self.galleryCount]
-        if let currentImage: ImageItem = self.currentImage {
-            self.downloadImage(imageItem: currentImage)
-        }
+        
+        let currentImage = ImageDataManager.sharedManager.images[self.galleryCount]
+        self.downloadImage(imageItem: currentImage)
+        
         navigationItem.title = "\(self.galleryCount + 1) / \(ImageDataManager.sharedManager.images.count)"
     }
     
     func animateImageTransition() {
         CATransaction.begin()
         
-        let animationDuration: NSTimeInterval = 0.25
+        let animationDuration: NSTimeInterval = 0.5
         let switchTimeInterval: NSTimeInterval = 2.0
         CATransaction.setAnimationDuration(animationDuration)
         CATransaction.setCompletionBlock { 
