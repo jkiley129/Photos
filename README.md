@@ -4,7 +4,7 @@ This app showcases some image handling techniques to create a photo-viewing app.
 
 RUNNING THE APP
 
-To run the app, please clone this repo or download the project as a ZIP file. Once the project is opened in Xcode, connect an iPhone, and hit the hotkey "Command + R" to run the app (you can also hit the play button in the top left corner of the Xcode window) . Xcode will prompt you to unlock your phone if it is currently locked and will open the app once it has installed and compiled on your device. Once it is running proceed to testing the app's functionality. Steps to test the app are provided below.
+To run the app, please clone this repo or download the project as a ZIP file. Once the project is opened in Xcode, connect an iPhone, and hit the hotkey "Command + R" to run the app (you can also hit the play button in the top left corner of the Xcode window). Xcode will prompt you to unlock your phone if it is currently locked and will open the app once it has installed and compiled on your device. Once it is running proceed to testing the app's functionality. Steps to test the app are provided below.
 
 For best results, please run the app on an iPhone.
 
